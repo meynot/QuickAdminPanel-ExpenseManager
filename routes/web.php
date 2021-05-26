@@ -1,11 +1,11 @@
 <?php
 
-Route::redirect('/', '/login');
-Route::redirect('/home', '/admin');
+Route::redirect('/', ENV('APP_URL') . '/login');
+Route::redirect('/home', ENV('APP_URL') . '/admin');
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
-    Route::redirect('/', '/admin/expenses');
+    Route::redirect('/', ENV('APP_URL') . '/admin/expenses');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
